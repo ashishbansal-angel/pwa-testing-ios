@@ -9,18 +9,19 @@ self.addEventListener('install', () => {
 });
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyC6w6x3cgPxcYNXPFx4c9U988-uaZ4VJ04",
-  authDomain: "pwa-testing-ios.firebaseapp.com",
-  projectId: "pwa-testing-ios",
-  storageBucket: "pwa-testing-ios.firebasestorage.app",
-  messagingSenderId: "311184862052",
-  appId: "1:311184862052:web:21a0a1308261f216962871"
+  apiKey: "AIzaSyBncccz4K7fDw3lUpKFnye_rzeAzQ3Ors8",
+  authDomain: "nxt-web-dev.firebaseapp.com",
+  projectId: "nxt-web-dev",
+  storageBucket: "nxt-web-dev.firebasestorage.app",
+  messagingSenderId: "696149663994",
+  appId: "1:696149663994:web:5102ab8b5a2f8016162943"
 });
 const messaging = firebase.messaging(app);
 
 
 
 messaging.onBackgroundMessage((payload) => {
+  console.log('Background message hit');
   console.log(
     "[firebase-messaging-sw.js] Received background message ",
     payload
@@ -33,6 +34,21 @@ messaging.onBackgroundMessage((payload) => {
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+    const url = 'https://uat-nxt.angelone.in/nxt/dashboard';
+    // event.waitUntil(
+    //   // clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+    //   //   // if (clientList?.length > 0) {
+    //   //   //   // return clients.openWindow(url);
+    //   //   //   return clientList[0].focus();
+    //   //   // }
+    //   //   return clients.openWindow(url);
+    //   // }),
+    // );
+    return clients.openWindow(url);
 });
 
 self.addEventListener('message', (event) => {

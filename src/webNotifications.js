@@ -2,19 +2,19 @@ import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, isSupported } from 'firebase/messaging';
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC6w6x3cgPxcYNXPFx4c9U988-uaZ4VJ04",
-  authDomain: "pwa-testing-ios.firebaseapp.com",
-  projectId: "pwa-testing-ios",
-  storageBucket: "pwa-testing-ios.firebasestorage.app",
-  messagingSenderId: "311184862052",
-  appId: "1:311184862052:web:21a0a1308261f216962871"
+  apiKey: "AIzaSyBncccz4K7fDw3lUpKFnye_rzeAzQ3Ors8",
+  authDomain: "nxt-web-dev.firebaseapp.com",
+  projectId: "nxt-web-dev",
+  storageBucket: "nxt-web-dev.firebasestorage.app",
+  messagingSenderId: "696149663994",
+  appId: "1:696149663994:web:5102ab8b5a2f8016162943"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-const vapidKey = 'BGpYZ6q_aK9P2BuVqhI9pJ6W6pWcMpM3txiRmZjBFBGrtryTTk4CCZYbCnRRQeX0gPek2auaOQ2SO8t0JXHwzKA'
+const vapidKey = 'BN1K8xDfaEvoD6sDJTsn1k2sHYL-UvlMEKzdHkbCmacpvdMnh-T5lD59PveBLXccQyTxuIKJJ_-CrP47NU7F2Mo'
 
 const getFirebaseToken = async () => {
   getToken(messaging, { vapidKey: vapidKey }).then((currentToken) => {

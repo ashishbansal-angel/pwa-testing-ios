@@ -27,36 +27,49 @@
 </template>
 
 <script>
+import { ref, watch } from 'vue';
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
   setup(){
+    const token = ref(window?.localStorage?.getItem('currentToken'));
     const handleRequestPermission = () => {
       if (!('Notification' in window)) {
         alert('Notification not supported');
       } else {
+        alert('Inside permission processing block');
         if (Notification.permission === 'granted') {
           alert('Permission already granted');
           new Notification('Permission Already granted');
         } else if (Notification.permission === 'denied') {
           alert('Permission already denied');
         } else {
-          Notification.requestPermission().then((permission) => {
-            if (permission === 'granted') {
-              alert('Permission granted');
-              new Notification('Yayy, Permission granted');
-            } else if (permission === 'denied') {
-              alert('Permission denied');
-            }
-          })
+          alert('Requesting permission');
+          try {
+            Notification.requestPermission().then((permission) => {
+              if (permission === 'granted') {
+                alert('Permission granted');
+                new Notification('Yayy, Permission granted');
+              } else if (permission === 'denied') {
+                alert('Permission denied');
+              }
+            });
+          } catch (error) {
+            alert('Notification request error', error);
+          }
         }
       }
     };
 
+    watch(() => window?.localStorage?.getItem('currentToken'), (newval) => {
+      token.value = newval;
+    });
+
     return {
-      token: window?.localStorage?.getItem('currentToken'),
+      token,
       handleRequestPermission,
     }
   }
