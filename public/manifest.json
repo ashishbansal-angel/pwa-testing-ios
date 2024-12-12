@@ -1,0 +1,12 @@
+{
+    "name": "pwa-testing-ios",
+    "short_name": "pwa-testing-ios",
+    "icons": [
+      { "src": "https://static.cleverpush.com/notification/icon/2Fu4ABEKo5qEMtP4T.png", "sizes": "256x256", "type": "image/png" }
+    ],
+    "theme_color": "#111111",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/"
+  }
+  
