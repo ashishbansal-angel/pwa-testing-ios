@@ -20,14 +20,9 @@
       <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div class="btn-div">
+      <button class="btn" @click="handleRequestPermission">Request Permission</button>
+    </div>
   </div>
 </template>
 
@@ -38,8 +33,31 @@ export default {
     msg: String
   },
   setup(){
+    const handleRequestPermission = () => {
+      if (!('Notification' in window)) {
+        alert('Notification not supported');
+      } else {
+        if (Notification.permission === 'granted') {
+          alert('Permission already granted');
+          new Notification('Permission Already granted');
+        } else if (Notification.permission === 'denied') {
+          alert('Permission already denied');
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+              alert('Permission granted');
+              new Notification('Yayy, Permission granted');
+            } else if (permission === 'denied') {
+              alert('Permission denied');
+            }
+          })
+        }
+      }
+    };
+
     return {
-      token: window?.localStorage?.getItem('currentToken')
+      token: window?.localStorage?.getItem('currentToken'),
+      handleRequestPermission,
     }
   }
 
